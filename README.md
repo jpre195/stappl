@@ -1,1 +1,1 @@
-# stappl
+# Statistical Testing APPLication (stappl)
