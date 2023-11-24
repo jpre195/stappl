@@ -29,7 +29,7 @@ h1s = {'Left-sided' : f'$H_1: \mu < {mu}$',
 
 st.divider()
 
-col1, col2 = st.columns(2)
+col1, col2, col3 = st.columns(3)
 
 #Write null and alternative hypothesis
 col1.header('Hypotheses')
@@ -43,11 +43,13 @@ sample_mean = df[sample].mean()
 col2.header('Sample Statistics')
 col2.write('$\overline{X} = ' + str(round(sample_mean, 4)) + '$')
 
-st.divider()
-
 #Calculate z-score
 z_score = (sample_mean - mu) / (sigma / np.sqrt(df.shape[0]))
-# z_score = list(z_score)[0]
+
+col3.header('Test Statistic')
+col3.write('$Z = ' + str(round(z_score, 4)) + '$')
+
+st.divider()
 
 #Calculate p-value
 if sided_test == 'Left-sided':

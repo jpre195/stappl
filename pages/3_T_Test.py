@@ -34,7 +34,7 @@ h1s = {'Left-sided' : f'$H_1: \mu < {mu}$',
 
 tab1.divider()
 
-col1, col2 = tab1.columns(2)
+col1, col2, col3 = tab1.columns(3)
 
 #Write null and alternative hypothesis
 col1.header('Hypotheses')
@@ -50,10 +50,13 @@ col2.header('Sample Statistics')
 col2.write('$\overline{X} = ' + str(round(sample_mean, 4)) + '$')
 col2.write('$S^2 = ' + str(round(sample_std, 4)) + '$')
 
-tab1.divider()
-
 #Calculate z-score
 t_score = (sample_mean - mu) / (sample_std / np.sqrt(df.shape[0]))
+
+col3.header('Test Statistic')
+col3.write('$T = ' + str(round(t_score, 4)) + '$')
+
+tab1.divider()
 
 #Calculate p-value
 if sided_test == 'Left-sided':
@@ -173,7 +176,7 @@ h1s = {'Left-sided' : f'$H_1: \mu_1 < \mu_2$',
 
 tab2.divider()
 
-col1, col2 = tab2.columns(2)
+col1, col2, col3 = tab2.columns([1, 2, 1])
 
 #Write null and alternative hypothesis
 col1.header('Hypotheses')
@@ -201,10 +204,13 @@ subcol2.write('$S^2_2 = ' + str(round(sample2_std, 4)) + '$')
 subcol3.write('$\overline{X}_D = ' + str(round(sample_diff_mean, 4)) + '$')
 subcol3.write('$S^2_D = ' + str(round(sample_diff_std, 4)) + '$')
 
-tab2.divider()
-
 #Calculate z-score
 t_score = (sample_diff_mean) / (sample_diff_std / np.sqrt(df.shape[0]))
+
+col3.header('Test Statistic')
+col3.write('$T = ' + str(round(t_score, 4)) + '$')
+
+tab2.divider()
 
 #Calculate p-value
 if sided_test == 'Left-sided':
@@ -325,7 +331,7 @@ h1s = {'Left-sided' : f'$H_1: \mu_1 < \mu_2$',
 
 tab3.divider()
 
-col1, col2 = tab3.columns(2)
+col1, col2, col3 = tab3.columns(3)
 
 #Write null and alternative hypothesis
 col1.header('Hypotheses')
@@ -351,8 +357,6 @@ subcol2.write('$\overline{X}_2 = ' + str(round(sample2_mean, 4)) + '$')
 subcol2.write('$S^2_2 = ' + str(round(sample2_std, 4)) + '$')
 subcol2.write('$n_2 = ' + str(sample2_n) + '$')
 
-tab3.divider()
-
 if equal_var:
 
     #Calculate t-score
@@ -371,6 +375,12 @@ else:
     denominator = (((sample1_std ** 2) / sample1_n) ** 2 / (sample1_n - 1) + ((sample2_std ** 2) / sample2_n) ** 2 / (sample2_n - 1))
 
     dof = numerator / denominator
+
+col3.header('Test Statistic')
+col3.write('$T = ' + str(round(t_score, 4)) + '$')
+col3.write('$d.o.f = ' + str(round(dof, 4)) + '$')
+
+tab3.divider()
 
 #Calculate p-value
 if sided_test == 'Left-sided':
